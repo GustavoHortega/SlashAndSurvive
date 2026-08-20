@@ -50,7 +50,8 @@ class Menu:
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        Tutorial.run()
+                        menu_option = 1
+                        return menu_option
 
     def menu_text(self, text: str, text_color: tuple, text_center_pos: tuple):
         text_surf = self.font.render(
