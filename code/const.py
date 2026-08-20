@@ -1,0 +1,8 @@
+# W
+WIN_WIDTH = 960
+WIN_HEIGHT = 540
+WIN_CAPTION = "Slash and Survive"
+
+#C
+
+C_WHITE = (255, 255, 255)
