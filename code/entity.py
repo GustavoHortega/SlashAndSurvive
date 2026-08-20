@@ -8,6 +8,8 @@ class Entity(ABC):
         self.health = health
         self.damage = damage
         self.position = position
+        self.frame = 0
+        self.last_update = 0
 
     @abstractmethod
     def move(self):

@@ -1,7 +1,6 @@
 import pygame
-import random
 
-from code.const import WIN_HEIGHT, WIN_WIDTH
+
 from code.entity import Entity
 
 

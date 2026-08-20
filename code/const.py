@@ -6,3 +6,7 @@ WIN_CAPTION = "Slash and Survive"
 #C
 
 C_WHITE = (255, 255, 255)
+
+# E
+
+ENTITY_SPEED = 2
