@@ -4,6 +4,7 @@ import pygame
 
 from code.const import WIN_HEIGHT, WIN_WIDTH
 from code.entityFactory import EntityFactory
+from code.entityMediator import EntityMediator
 
 
 class Level:
@@ -28,6 +29,7 @@ class Level:
 
             self.player.move()
             self.player.animate()
+            EntityMediator.check_collision(self.player, self.enemies)
 
             if current_time - self.last_enemy_spawn >= 1000:
                 self.enemies.append(
