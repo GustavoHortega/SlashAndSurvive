@@ -19,24 +19,63 @@ class Player(Entity):
             center=self.position,
         )
 
+        self.animations = {
+            "down": {
+                "idle": pygame.image.load("assets/PlayerDownIdle.png").convert_alpha(),
+                "walk": [
+                    pygame.image.load("assets/PlayerDownWalk1.png").convert_alpha(),
+                    pygame.image.load("assets/PlayerDownWalk2.png").convert_alpha()
+                ]
+            },
+
+            "up": {
+                "idle": pygame.image.load("assets/PlayerUpIdle.png").convert_alpha(),
+                "walk": [
+                    pygame.image.load("assets/PlayerUpWalk1.png").convert_alpha(),
+                    pygame.image.load("assets/PlayerUpWalk2.png").convert_alpha()
+                ]
+            },
+
+            "left": {
+                "idle": pygame.image.load("assets/PlayerLeftIdle.png").convert_alpha(),
+                "walk": [
+                    pygame.image.load("assets/PlayerLeftWalk1.png").convert_alpha(),
+                    pygame.image.load("assets/PlayerLeftWalk2.png").convert_alpha()
+                ]
+            },
+
+            "right": {
+                "idle": pygame.image.load("assets/PlayerRightIdle.png").convert_alpha(),
+                "walk": [
+                    pygame.image.load("assets/PlayerRightWalk1.png").convert_alpha(),
+                    pygame.image.load("assets/PlayerRightWalk2.png").convert_alpha()
+                ]
+            }
+        }
+
     def move(self):
+        self.is_moving = False
         entity_speed = ENTITY_SPEED
         pressedkey = pygame.key.get_pressed()
         if (pressedkey[pygame.K_LEFT] or pressedkey[pygame.K_a]) and self.rect.left > 0:
             self.rect.centerx -= entity_speed
             self.direction = "left"
+            self.is_moving = True
 
         if (pressedkey[pygame.K_RIGHT] or pressedkey[pygame.K_d]) and self.rect.right < WIN_WIDTH:
             self.rect.centerx += entity_speed
             self.direction = "right"
+            self.is_moving = True
 
         if (pressedkey[pygame.K_UP] or pressedkey[pygame.K_w]) and self.rect.top > 0:
             self.rect.centery -= entity_speed
             self.direction = "up"
+            self.is_moving = True
 
         if (pressedkey[pygame.K_DOWN] or pressedkey[pygame.K_s]) and self.rect.bottom < WIN_HEIGHT:
             self.rect.centery += entity_speed
             self.direction = "down"
+            self.is_moving = True
 
         self.position = self.rect.center
 
