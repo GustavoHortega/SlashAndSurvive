@@ -1,6 +1,6 @@
 import pygame
 
-from code.const import WIN_HEIGHT, WIN_WIDTH, ENTITY_SPEED
+from code.const import WIN_HEIGHT, WIN_WIDTH, PLAYER_SPEED
 from code.entity import Entity
 
 
@@ -55,7 +55,7 @@ class Player(Entity):
 
     def move(self):
         self.is_moving = False
-        entity_speed = ENTITY_SPEED
+        entity_speed = PLAYER_SPEED
         pressedkey = pygame.key.get_pressed()
         if (pressedkey[pygame.K_LEFT] or pressedkey[pygame.K_a]) and self.rect.left > 0:
             self.rect.centerx -= entity_speed

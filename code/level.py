@@ -22,6 +22,8 @@ class Level:
             clock.tick(60)
             self.player.move()
             self.player.animate()
+            self.enemy.move(self.player)
+            self.enemy.animate()
             self.window.blit(self.surf, self.rect)
             self.window.blit(self.player.surf, self.player.rect)
             self.window.blit(self.enemy.surf, self.enemy.rect)

@@ -37,7 +37,7 @@ class Menu:
             # TEXTO
             if (pygame.time.get_ticks() // 300) % 2 == 0:
                 self.menu_text(
-                    'Press space bar to start',
+                    'PRESSIONE BARRA DE ESPAÇO PARA COMEÇAR',
                     C_WHITE,
                     (WIN_WIDTH // 2, WIN_HEIGHT - 100)
                 )

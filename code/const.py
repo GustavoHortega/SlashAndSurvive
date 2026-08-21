@@ -9,7 +9,11 @@ C_WHITE = (255, 255, 255)
 
 # E
 
-ENTITY_SPEED = 2
+ENEMY_SPEED = 1
+
+# P
+
+PLAYER_SPEED = 2
 
 # S
 
