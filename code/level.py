@@ -13,20 +13,32 @@ class Level:
         self.surf = pygame.transform.scale(ground, (WIN_WIDTH, WIN_HEIGHT))
         self.rect = self.surf.get_rect()
         self.player = EntityFactory.get_entity('Player')
-        self.enemy = EntityFactory.get_entity('Enemy')
+        self.enemies = []
+        self.last_enemy_spawn = pygame.time.get_ticks()
 
     def run(self):
         clock = pygame.time.Clock()
 
         while True:
             clock.tick(60)
-            self.player.move()
-            self.player.animate()
-            self.enemy.move(self.player)
-            self.enemy.animate()
+            current_time = pygame.time.get_ticks()
+
             self.window.blit(self.surf, self.rect)
             self.window.blit(self.player.surf, self.player.rect)
-            self.window.blit(self.enemy.surf, self.enemy.rect)
+
+            self.player.move()
+            self.player.animate()
+
+            if current_time - self.last_enemy_spawn >= 1000:
+                self.enemies.append(
+                    EntityFactory.get_entity('Enemy')
+                )
+                self.last_enemy_spawn = current_time
+
+            for enemy in self.enemies:
+                enemy.move(self.player)
+                enemy.animate()
+                self.window.blit(enemy.surf, enemy.rect)
 
             pygame.display.flip()
 
