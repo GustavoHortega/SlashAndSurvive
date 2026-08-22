@@ -78,6 +78,3 @@ class Enemy(Entity):
             self.is_moving = True
 
         self.position = self.rect.center
-
-    def attack(self):
-        pass

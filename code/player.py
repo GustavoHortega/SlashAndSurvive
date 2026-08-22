@@ -13,7 +13,7 @@ class Player(Entity):
             name,
             position=(WIN_WIDTH // 2, WIN_HEIGHT // 2),
             health=100,
-            damage=10
+            damage=999
         )
 
         self.surf = pygame.image.load('assets/PlayerDownIdle.png').convert_alpha()

@@ -59,7 +59,8 @@ class Level:
             # COLLISION
             EntityMediator.check_collision(
                 self.player,
-                self.enemies
+                self.enemies,
+                self.attack
             )
 
             # DESENHA O FUNDO
@@ -96,6 +97,11 @@ class Level:
 
             if self.player.health <= 0:
                 return
+
+            self.enemies = [
+                enemy for enemy in self.enemies
+                if enemy.health > 0
+            ]
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
