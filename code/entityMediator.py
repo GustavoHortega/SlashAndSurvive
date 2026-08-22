@@ -6,6 +6,7 @@ class EntityMediator:
             player_collision = player.rect.colliderect(enemy.rect)
 
             if player_collision:
+                player.take_damage(enemy.damage)
                 return True
 
         return False

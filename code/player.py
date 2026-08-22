@@ -1,6 +1,8 @@
 import pygame
+from pygame import key
 
-from code.const import WIN_HEIGHT, WIN_WIDTH, PLAYER_SPEED
+from code.attack import Attack
+from code.const import WIN_HEIGHT, WIN_WIDTH, PLAYER_SPEED, ATTACK_COOLDOWN
 from code.entity import Entity
 
 
@@ -53,26 +55,28 @@ class Player(Entity):
             }
         }
 
+        self.last_attack = 0
+
     def move(self):
         self.is_moving = False
         entity_speed = PLAYER_SPEED
-        pressedkey = pygame.key.get_pressed()
-        if (pressedkey[pygame.K_LEFT] or pressedkey[pygame.K_a]) and self.rect.left > 0:
+        pressed_key = pygame.key.get_pressed()
+        if (pressed_key[pygame.K_LEFT] or pressed_key[pygame.K_a]) and self.rect.left > 0:
             self.rect.centerx -= entity_speed
             self.direction = "left"
             self.is_moving = True
 
-        if (pressedkey[pygame.K_RIGHT] or pressedkey[pygame.K_d]) and self.rect.right < WIN_WIDTH:
+        if (pressed_key[pygame.K_RIGHT] or pressed_key[pygame.K_d]) and self.rect.right < WIN_WIDTH:
             self.rect.centerx += entity_speed
             self.direction = "right"
             self.is_moving = True
 
-        if (pressedkey[pygame.K_UP] or pressedkey[pygame.K_w]) and self.rect.top > 0:
+        if (pressed_key[pygame.K_UP] or pressed_key[pygame.K_w]) and self.rect.top > 0:
             self.rect.centery -= entity_speed
             self.direction = "up"
             self.is_moving = True
 
-        if (pressedkey[pygame.K_DOWN] or pressedkey[pygame.K_s]) and self.rect.bottom < WIN_HEIGHT:
+        if (pressed_key[pygame.K_DOWN] or pressed_key[pygame.K_s]) and self.rect.bottom < WIN_HEIGHT:
             self.rect.centery += entity_speed
             self.direction = "down"
             self.is_moving = True
@@ -80,4 +84,12 @@ class Player(Entity):
         self.position = self.rect.center
 
     def attack(self):
-        pass
+        pressed_key = pygame.key.get_pressed()
+        current_time = pygame.time.get_ticks()
+
+        if pressed_key[pygame.K_LCTRL] or pressed_key[pygame.K_RCTRL]:
+            if current_time - self.last_attack >= ATTACK_COOLDOWN:
+                self.last_attack = current_time
+                return Attack(self)
+
+        return None

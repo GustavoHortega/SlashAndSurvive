@@ -48,6 +48,5 @@ class Entity(ABC):
                 self.frame += 1
             self.last_update = current_time
 
-    @abstractmethod
-    def attack(self):
-        pass
+    def take_damage(self, damage):
+        self.health -= damage
