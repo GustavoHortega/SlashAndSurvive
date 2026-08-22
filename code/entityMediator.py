@@ -1,16 +1,20 @@
-from code.attack import Attack
-from code.entity import Entity
+import pygame
+
+from code.const import PLAYER_DAMAGE_COOLDOWN
 
 
 class EntityMediator:
 
     @staticmethod
-    def check_collision(player, enemies,attack):
+    def check_collision(player, enemies, attack):
+        current_time = pygame.time.get_ticks()
         for enemy in enemies:
             player_collision = player.rect.colliderect(enemy.rect)
 
             if player_collision:
-                player.take_damage(enemy.damage)
+                if current_time - player.last_damage >= PLAYER_DAMAGE_COOLDOWN:
+                    player.take_damage(enemy.damage)
+                    player.last_damage = current_time
                 return True
 
             if attack is not None:

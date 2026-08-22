@@ -56,6 +56,7 @@ class Player(Entity):
         }
 
         self.last_attack = 0
+        self.last_damage = 0
 
     def move(self):
         self.is_moving = False
